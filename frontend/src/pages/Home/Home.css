@@ -1,0 +1,15 @@
+.home-cont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.header{
+    background-color: white;
+    margin-top: 50px;
+    width: 350px;
+    padding: 10px 50px;
+    text-align: center;
+    border-radius: 10px;
+}

@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@600&family=Baloo+Bhaina+2:wght@700&family=Merriweather&family=Open+Sans:wght@600&family=PT+Sans&family=Roboto:wght@400;700&family=Titillium+Web:wght@600;700&family=Ubuntu:wght@500&family=Urbanist:wght@500&display=swap');
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Urbanist', sans-serif;
+    
+}
+
+.App{
+    background-image: url('./images//background.png');
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+::-webkit-scrollbar{
+    width: 0px;
+}
+::-webkit-scrollbar-thumb{
+    background: rgba(136, 136, 136, 0.281);
+}
+::-webkit-scrollbar-thumb:hover{
+    background: #555;
+}
