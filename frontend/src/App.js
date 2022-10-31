@@ -19,7 +19,7 @@ function App() {
   const [user,setUser] = useState()
   const [selectedChat,setSelectedChat] = useState()
   const [chats,setChats] = useState([])
-
+  const [notfications, setNotifications] = useState([])
   // useEffect(()=>{
   //   const userInfo = JSON.parse(localStorage.getItem('userInfo'))
   //     setUser(userInfo)
@@ -31,7 +31,7 @@ function App() {
   return (
 
 
-      <ChatContext.Provider value={{user,setUser,selectedChat,setSelectedChat,chats,setChats}}>
+      <ChatContext.Provider value={{user,setUser,selectedChat,setSelectedChat,chats,setChats,notfications, setNotifications}}>
         <div className="App">
           <Routes>
             <Route exact path='/' element={<HomePage />} />
