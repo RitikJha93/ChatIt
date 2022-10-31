@@ -21,7 +21,7 @@ import ChatContext from '../../context/ChatContext'
 import UserBadgeItem from '../UserAvatar/UserBadgeItem'
 import axios from 'axios'
 import UserListItem from '../UserAvatar/UserListItem'
-const UpdateGroupChatModal = ({fetchAgain,setFetchAgain}) => {
+const UpdateGroupChatModal = ({fetchAgain,setFetchAgain,fetchMessages}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const {user,selectedChat,setSelectedChat} = useContext(ChatContext)
     const [groupChatName,setGroupChatName] = useState()
@@ -31,9 +31,7 @@ const UpdateGroupChatModal = ({fetchAgain,setFetchAgain}) => {
     const [renameLoading,setRenameLoading] = useState(false)
 
     const toast = useToast()
-    const handleDelete = ()=>{
 
-    }
     const handleRename = async()=>{
         if(!groupChatName) return
 
@@ -111,13 +109,14 @@ const UpdateGroupChatModal = ({fetchAgain,setFetchAgain}) => {
                 }
             }
 
-            const {data} = await axios.get(`/api/chat/groupremove`, 
+            const {data} = await axios.put(`/api/chat/groupremove`, 
             {
                 chatId : selectedChat._id,
                 userId : user1._id
             },config)
             user1._id === user._id ? setSelectedChat() : setSelectedChat(data)
             setFetchAgain(!fetchAgain)
+            fetchMessages()
             setRenameLoading(false)
         } catch (error) {
             toast({
@@ -161,7 +160,7 @@ const UpdateGroupChatModal = ({fetchAgain,setFetchAgain}) => {
                 }
             }
 
-            const {data} = await axios.get(`/api/chat/groupadd`, 
+            const {data} = await axios.put(`/api/chat/groupadd`, 
             {
                 chatId : selectedChat._id,
                 userId : user1._id

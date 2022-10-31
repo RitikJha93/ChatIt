@@ -62,8 +62,11 @@ const Login = () => {
    
     useEffect(()=>{
         const user = JSON.parse(localStorage.getItem('userInfo'))
-        if(user){
-            navigate('/chat')
+        if(!user){
+            navigate('/')
+        }
+        else{
+          navigate('/chat')
         }
     },[navigate])
   return (

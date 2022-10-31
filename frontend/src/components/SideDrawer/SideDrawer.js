@@ -2,7 +2,7 @@ import { Box, Button, Input, Menu, MenuButton, MenuDivider, MenuItem, MenuList, 
 import React, { useContext, useState } from 'react'
 import { FiSearch } from 'react-icons/fi';
 import { FaBell } from 'react-icons/fa';
-import { MdKeyboardArrowDown } from 'react-icons/md';
+import { MdKeyboardArrowDown, MdNotifications } from 'react-icons/md';
 import { Avatar, AvatarBadge, AvatarGroup } from '@chakra-ui/react'
 import { ChevronDownIcon,BellIcon } from '@chakra-ui/icons'
 import {
@@ -20,13 +20,14 @@ import {useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ChatLoading from '../ChatLoading';
 import UserListItem from '../UserAvatar/UserListItem';
+import { getSender } from '../config/ChatLogics';
 const SideDrawer = () => {
 
   const [search,setSearch] = useState('')
   const [searchResult,setSearchResult] = useState([])
   const [loading,setLoading] = useState(false)
   const [loadingChat,setLoadingChat] = useState(false)
-  const {user,setSelectedChat,chats,setChats} = useContext(ChatContext)
+  const {user,setSelectedChat,chats,setChats,notfications, setNotifications} = useContext(ChatContext)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const toast = useToast()
   const navigate = useNavigate()
@@ -127,7 +128,23 @@ const SideDrawer = () => {
           <MenuButton p={1}>
             <BellIcon fontSize='2xl' mr={5}/>
           </MenuButton>
-          {/* <MenuList></MenuList> */}
+          <MenuList pl={2}>
+            {!notfications.length && "no new messages"}
+            {
+              notfications.map((notif)=>{
+                return(
+                  <MenuItem key={notif._id} onClick={()=>{
+                    setSelectedChat(notif.chat)
+                    setNotifications(notfications.filter((n)=> n !== notif))
+                  }}>
+                    {notif.chat.isGroupChat ? `New message in ${notif.chat.chatName}` :
+                      `New message from ${getSender(user,notif.chat.users)}`
+                    }
+                  </MenuItem>
+                )
+              })
+            }
+          </MenuList>
         <Menu>
             <MenuButton as={Button} p={1} rightIcon={<ChevronDownIcon />}>
               <Avatar size='sm' name={user.name} cursor='pointer' src={user.pic}/>
